@@ -33,7 +33,7 @@
       <div>
         <ul>
           <li 
-            v-for='item in utiles' 
+            v-for='item in listaReversa' 
             :class="{tachado : item.comprado}"
             @click='cambiarEstadoCompra(item)'
           >{{item.util}}</li>
@@ -84,6 +84,11 @@
           },
           cambiarEstadoCompra(util){
             util.comprado = !util.comprado
+          }
+        },
+        computed:{
+          listaReversa(){
+            return this.utiles.slice(0).reverse()
           }
         }
       });
