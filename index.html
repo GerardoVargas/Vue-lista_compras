@@ -11,6 +11,12 @@
   <div id="lista-compras">
     <!-- <h1>{{ header ? header : 'Bienvenido' }}</h1> -->
     <h1>{{ header.toLocaleUpperCase() }}</h1>
+
+    <div>
+      <input type="text" placeholder="Agregar nuevo" v-model="newUtil" @keyup.enter="utiles.push(newUtil)">
+      <button class="btn btn-primary" @click='utiles.push(newUtil)' >Agregar elemento</button>
+    </div>
+
     <ul>
       <li v-for='item in utiles'>{{item}}</li>
     </ul>
@@ -28,7 +34,8 @@
           '10 cuadernos',
           '15 lapices',
           '5 cajas de colores'
-        ]
+        ],
+        newUtil: ''
       }
     });
   </script>
