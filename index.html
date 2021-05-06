@@ -22,7 +22,11 @@
       <br>
       <div v-if="estado === 'edit'">
         <input type="text" placeholder="Agregar nuevo" v-model="newUtil" @keyup.enter="guardarElemento">
-        <button class="btn btn-primary" @click='guardarElemento' >Guardar</button>
+        <button 
+          class="btn btn-primary" 
+          @click='guardarElemento'
+          :disabled='newUtil.length === 0'
+        >Guardar</button>
       </div>
   
       <div>
