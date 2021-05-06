@@ -31,7 +31,7 @@
   
       <div>
         <ul>
-          <li v-for='item in utiles'>{{item}}</li>
+          <li v-for='item in utiles'>{{item.util}}</li>
         </ul>
       </div>
       <div v-if='utiles.length === 0'>
@@ -48,16 +48,24 @@
         data:{
           header: 'Listado de útiles',
           utiles: [
-            /* '10 cuadernos',
-            '15 lapices',
-            '5 cajas de colores'*/
+          {
+            util: '20 cuadernos'
+          },
+          {
+            util: '15 lapices'
+          },
+          {
+            util: ' 5 cajas de colores'
+          }
           ],
           newUtil: '',
           estado: 'default'
         },
         methods: {
           guardarElemento:function(){
-            this.utiles.push(this.newUtil)
+            this.utiles.push({
+              util: this.newUtil
+            })
             this.newUtil = ''
             this.estado = 'default'
           },
