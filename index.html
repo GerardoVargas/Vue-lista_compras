@@ -10,17 +10,29 @@
 <body>
   <div class="container">
     <div id="lista-compras">
-      <!-- <h1>{{ header ? header : 'Bienvenido' }}</h1> -->
-      <h1>{{ header.toLocaleUpperCase() }}</h1>
-  
-      <div>
+      <div class="header">
+        <h1>{{ header.toLocaleUpperCase() }}</h1>
+        <button 
+          v-if='estado === "default"'
+          class='btn btn-primary'
+          @click='cambiarEstado("edit")'
+        >Agregar</button>
+        <button v-else class='btn btn-cancel' @click='cambiarEstado("default")'>Cancelar</button>
+      </div>
+      <br>
+      <div v-if="estado === 'edit'">
         <input type="text" placeholder="Agregar nuevo" v-model="newUtil" @keyup.enter="guardarElemento">
-        <button class="btn btn-primary" @click='guardarElemento' >Agregar elemento</button>
+        <button class="btn btn-primary" @click='guardarElemento' >Guardar</button>
       </div>
   
-      <ul>
-        <li v-for='item in utiles'>{{item}}</li>
-      </ul>
+      <div>
+        <ul>
+          <li v-for='item in utiles'>{{item}}</li>
+        </ul>
+      </div>
+      <div v-if='utiles.length === 0'>
+        <p>La lista esta vacia</p>
+      </div>
   
   
     </div>
@@ -32,16 +44,22 @@
         data:{
           header: 'Listado de útiles',
           utiles: [
-            '10 cuadernos',
+            /* '10 cuadernos',
             '15 lapices',
-            '5 cajas de colores'
+            '5 cajas de colores'*/
           ],
-          newUtil: ''
+          newUtil: '',
+          estado: 'default'
         },
         methods: {
           guardarElemento:function(){
             this.utiles.push(this.newUtil)
             this.newUtil = ''
+            this.estado = 'default'
+          },
+          cambiarEstado:function(nuevoEstado){
+            this.estado = nuevoEstado
+            this.newUtil =''
           }
         }
       });
